@@ -6,7 +6,7 @@ html, body {
     justify-content: center;
 }
 
-.puzzleBoard {
+.puzzle-board {
     width: 400px;
     height: 400px;
     display: flex;
