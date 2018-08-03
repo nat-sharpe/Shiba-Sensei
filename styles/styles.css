@@ -7,24 +7,23 @@ html, body {
 }
 
 .puzzle-board {
-    --board-width: 400px;
-    --board-height: 400px;
+    --board-width: 800px;
+    --board-height: 300px;
     width: var(--board-width);
     height: var(--board-height);
     display: flex;
     flex-wrap: wrap;
 }
 
-
 .top-left, .top-right, .bottom-left, .bottom-right {
     width: calc(var(--board-width) / 2);
     height: calc(var(--board-height) / 2);
     position: relative;
-
 }
 
 .top-left-image, .top-right-image, .bottom-left-image,.bottom-right-image {
     width: 200%;
+    height: 200%;
     position: absolute;
     
 }
@@ -32,13 +31,13 @@ html, body {
 .top-left-image {
     top: 0;
     left: 0;
-    clip: rect(0, calc(var(--board-height) / 2), calc(var(--board-width) / 2), 0px);
+    clip: rect(0, calc(var(--board-width) / 2), calc(var(--board-height) / 2), 0);
 }
 
 .top-right-image {
     top: 0;
     left: calc(var(--board-width) / -2);
-    clip: rect(0px, var(--board-height), calc(var(--board-width) / 2), calc(var(--board-width) / 2));
+    clip: rect(0, var(--board-width), calc(var(--board-height) / 2), calc(var(--board-width) / 2));
 }
 
 .bottom-left-image {
@@ -50,5 +49,5 @@ html, body {
 .bottom-right-image {
     top: calc(var(--board-height) / -2);
     left: calc(var(--board-width) / -2);
-    clip: rect(calc(var(--board-height), var(--board-width), var(--board-height), calc(var(--board-width) / 2));
+    clip: rect(calc(var(--board-height) / 2), var(--board-width), var(--board-height), calc(var(--board-width) / 2));
 }
