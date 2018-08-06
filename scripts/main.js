@@ -18,20 +18,46 @@
     };
     var imagesScrambled = scrambleImages(imagesSorted);
     // init get images function
+
+   
+
     var getImages = function (data) {
         image = data[0];
+        var oneClick = false;
+        var firstPiece = null;
+        var firstPieceClass = '';
         // init puzzle pieces
         for (var i = 0; i < 9; i++) {
-            var puzzlePiece = document.createElement('div');
-            var pieceImage = document.createElement('img');
+            var setPuzzleBoard = function () {
+                var currentIndex = i;
+                var puzzlePiece = document.createElement('div');
+                var pieceImage = document.createElement('img');
 
-            puzzlePiece.classList.add('puzzle-piece');
-            pieceImage.setAttribute('src', image);
-            pieceImage.classList.add(imagesScrambled[i]);
+                puzzlePiece.classList.add('puzzle-piece');
+                pieceImage.setAttribute('src', image);
+                pieceImage.classList.add(imagesScrambled[i]);
 
-            puzzlePiece.appendChild(pieceImage);
-            var puzzleBoard = document.querySelector('.puzzle-board');
-            puzzleBoard.appendChild(puzzlePiece);
+                puzzlePiece.appendChild(pieceImage);
+                var puzzleBoard = document.querySelector('.puzzle-board');
+                puzzleBoard.appendChild(puzzlePiece);
+
+                var swapPieces = function() {
+                    if (oneClick === true) {
+                        oneClick = false;
+                        pieceImage.classList.remove(imagesScrambled[currentIndex]);
+                        pieceImage.classList.add(firstPieceClass);
+                        firstPiece.classList.remove(firstPieceClass);
+                        firstPiece.classList.add(imagesScrambled[currentIndex]);
+                    }
+                    else {
+                        oneClick = true;
+                        firstPiece = pieceImage;
+                        firstPieceClass = imagesScrambled[currentIndex];
+                    }
+                };
+                pieceImage.addEventListener('click', swapPieces);
+            };
+            setPuzzleBoard();
         };
     };
     // init GET request
