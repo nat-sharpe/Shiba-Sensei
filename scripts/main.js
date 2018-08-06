@@ -17,19 +17,14 @@
         return imagesScrambled;
     };
     var imagesScrambled = scrambleImages(imagesSorted);
+    var puzzleBoard = document.querySelector('.puzzle-board');
     // init get images function
-
-   
 
     var getImages = function (data) {
         image = data[0];
-        var oneClick = false;
-        var firstPiece = null;
-        var firstPieceClass = '';
         // init puzzle pieces
         for (var i = 0; i < 9; i++) {
             var setPuzzleBoard = function () {
-                var currentIndex = i;
                 var puzzlePiece = document.createElement('div');
                 var pieceImage = document.createElement('img');
 
@@ -38,28 +33,37 @@
                 pieceImage.classList.add(imagesScrambled[i]);
 
                 puzzlePiece.appendChild(pieceImage);
-                var puzzleBoard = document.querySelector('.puzzle-board');
                 puzzleBoard.appendChild(puzzlePiece);
-
-                var swapPieces = function() {
-                    if (oneClick === true) {
-                        oneClick = false;
-                        pieceImage.classList.remove(imagesScrambled[currentIndex]);
-                        pieceImage.classList.add(firstPieceClass);
-                        firstPiece.classList.remove(firstPieceClass);
-                        firstPiece.classList.add(imagesScrambled[currentIndex]);
-                    }
-                    else {
-                        oneClick = true;
-                        firstPiece = pieceImage;
-                        firstPieceClass = imagesScrambled[currentIndex];
-                    }
-                };
-                pieceImage.addEventListener('click', swapPieces);
             };
             setPuzzleBoard();
         };
     };
+    var gameLogic = function () {
+        var oneClick = false;
+        var firstPiece = '';
+        var firstPieceClass = '';
+
+        var swapPieces = function(event) {
+            if (oneClick === true && event.target !== firstPiece) {
+                oneClick = false;
+                var secondPieceClass = event.target.getAttribute('class');
+                event.target.classList.remove(secondPieceClass);
+                event.target.classList.add(firstPieceClass);
+                firstPiece.classList.add(secondPieceClass);
+                firstPiece.classList.remove(firstPieceClass);
+            }
+            else if (oneClick === true && event.target === firstPiece) {
+                oneClick = false;
+            }
+            else {
+                oneClick = true;
+                firstPiece = event.target;
+                firstPieceClass = event.target.getAttribute('class');
+            }
+        };
+        puzzleBoard.addEventListener('click', swapPieces);
+    };
     // init GET request
     $.get(url, getImages);
+    gameLogic();
 })();
