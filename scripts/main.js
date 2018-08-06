@@ -3,16 +3,21 @@
     var url = 'http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true';
     var image;
     // init get images function
+    for (var i = 0; i < 9; i++)
     var getImages = function (data) {
         image = data[0];
         // init puzzle pieces
-        var puzzlePiece = document.createElement('img');
-        puzzlePiece.classList.add('.puzzlePiece');
-        puzzlePiece.setAttribute('src', image);
-        // init puzzle board then
-        // append pieces to board
-        var puzzleBoard = document.querySelector('.puzzleBoard');
-        puzzleBoard.appendChild(puzzlePiece);
+            var currentI = i;
+            var puzzlePiece = document.createElement('div');
+            var pieceImage = document.createElement('img');
+
+            puzzlePiece.classList.add('puzzle-piece');
+            pieceImage.setAttribute('src', image);
+            pieceImage.classList.add('top-left-image');
+
+            puzzlePiece.appendChild(pieceImage);
+            var puzzleBoard = document.querySelector('.puzzle-board');
+            puzzleBoard.appendChild(puzzlePiece);
     };
     // init GET request
     $.get(url, getImages);
