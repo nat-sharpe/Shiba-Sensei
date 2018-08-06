@@ -52,6 +52,21 @@
                 firstPiece.classList.add(secondPieceClass);
                 firstPiece.classList.remove(firstPieceClass);
                 firstPiece.classList.remove('highlightproperties');
+                var puzzlePieceList = document.getElementsByClassName('puzzle-piece')
+                var listToCompare = [];
+                for (var i = 0; i < 9; i++) {
+                    var imgPosition = puzzlePieceList[i].firstChild.className;
+                    listToCompare.push(imgPosition);
+                };
+                var win = true
+                for (var i = 0; i < 9; i++) {
+                    if (imagesSorted[i] !== listToCompare[i]) {
+                        win = false
+                    }
+                }
+                if (win === true) {
+                    window.alert("YOU WON! Click refresh to generate another doge.")
+                }
             }
             else if (oneClick === true && event.target === firstPiece) {
                 oneClick = false;
@@ -70,3 +85,4 @@
     $.get(url, getImages);
     gameLogic();
 })();
+
