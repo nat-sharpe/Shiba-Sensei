@@ -112,6 +112,6 @@ body {
     left: calc((var(--board-width) / -3) * 2);
 }
 
-.highLightProperties {
+.highlightproperties {
     opacity: 0.33;
 }

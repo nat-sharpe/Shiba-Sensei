@@ -51,17 +51,17 @@
                 event.target.classList.add(firstPieceClass);
                 firstPiece.classList.add(secondPieceClass);
                 firstPiece.classList.remove(firstPieceClass);
-                firstPiece.classList.remove('highLightProperties');
+                firstPiece.classList.remove('highlightproperties');
             }
             else if (oneClick === true && event.target === firstPiece) {
                 oneClick = false;
-                firstPiece.classList.remove('highLightProperties');
+                firstPiece.classList.remove('highlightproperties');
             }
             else {
                 oneClick = true;
                 firstPiece = event.target;
                 firstPieceClass = event.target.getAttribute('class');
-                event.target.classList.add('highLightProperties');
+                event.target.classList.add('highlightproperties');
             }
         };
         puzzleBoard.addEventListener('click', swapPieces);
