@@ -10,6 +10,7 @@ body {
 }
 
 .puzzle-board {
+    background-color: pink; 
     --board-width: 80vw;
     --board-height: 80vw;
     width: var(--board-width);
@@ -109,4 +110,8 @@ body {
 .bottom-right-image {
     top: calc((var(--board-height) / -3) * 2);
     left: calc((var(--board-width) / -3) * 2);
+}
+
+.highlightproperties {
+    opacity: 0.33;
 }
