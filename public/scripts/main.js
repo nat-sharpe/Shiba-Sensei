@@ -18,11 +18,19 @@
     };
     var imagesScrambled = scrambleImages(imagesSorted);
     var puzzleBoard = $('.puzzle-board');
-    var newPuzzle = $('.new-puzzle');
+    var skipButton = $('.skip-button');
+    var numMoves = 0;
+    var numSkips = 0;
+    var numPuzzles = 0;
 
     var printPuzzle = function () {
         $.get('https://my-little-cors-proxy.herokuapp.com/'+url, getImages);
     }
+
+    var skipPuzzle = function () {
+        numSkips++;
+        printPuzzle();
+     }
     // init get images function
 
     var getImages = function (data) {
@@ -53,6 +61,7 @@
         var swapPieces = function(event) {
             if (oneClick === true && event.target !== firstPiece) {
                 oneClick = false;
+                numMoves++;
                 var secondPieceClass = event.target.getAttribute('class');
                 event.target.classList.remove(secondPieceClass);
                 event.target.classList.add(firstPieceClass);
@@ -72,6 +81,10 @@
                     }
                 }
                 if (win === true) {
+                    numPuzzles++;
+                    console.log(numPuzzles);
+                    console.log(numMoves);
+                    console.log(numSkips);
                     setTimeout(function() {
                         window.alert('YOU WON! Click OK to play again.');
                         printPuzzle();
@@ -90,10 +103,9 @@
             }
         };
         puzzleBoard.on('click', swapPieces);
-        newPuzzle.on('click', printPuzzle);
+        skipButton.on('click', skipPuzzle);
     };
     // init GET request
     printPuzzle();
     gameLogic();
 })();
-
