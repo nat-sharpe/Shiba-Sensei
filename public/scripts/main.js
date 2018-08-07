@@ -1,6 +1,6 @@
 (function iife () {
     // init global variables
-    var url = 'http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=false';
+    var url = 'http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true';
     var image;
     // init scramble image classes
     var imagesSorted = ['top-left-image', 'top-mid-image', 'top-right-image', 'mid-left-image', 'mid-mid-image', 'mid-right-image', 'bottom-left-image', 'bottom-mid-image', 'bottom-right-image'];
@@ -21,7 +21,7 @@
     var newPuzzle = $('.new-puzzle');
 
     var printPuzzle = function () {
-        $.get(url, getImages);
+        $.get('https://my-little-cors-proxy.herokuapp.com/'+url, getImages);
     }
     // init get images function
 
