@@ -18,11 +18,29 @@
     };
     var imagesScrambled = scrambleImages(imagesSorted);
     var puzzleBoard = $('.puzzle-board');
-    var newPuzzle = $('.new-puzzle');
+    var skipButton = $('.skip-button');
+    var numMoves = 0;
+    var numSkips = 0;
+    var numPuzzles = 0;
+    var startTime;
+    var endTime;
+    var seconds = 0;
 
     var printPuzzle = function () {
-        $.get(url, getImages);
+        $.get('https://my-little-cors-proxy.herokuapp.com/'+url, getImages);
     }
+
+    var start = function () {
+        startTime = new Date();
+    };
+
+    var end = function () {
+        endTime = new Date();
+        var timeDiff = endTime - startTime; //in ms
+        timeDiff /= 1000;
+        // get seconds 
+        seconds = Math.round(timeDiff);
+    };
     // init get images function
 
     var getImages = function (data) {
@@ -50,9 +68,16 @@
         var firstPiece = '';
         var firstPieceClass = '';
 
+        var skipPuzzle = function () {
+            oneClick = false;
+            numSkips++;
+            printPuzzle();
+        }
+
         var swapPieces = function(event) {
             if (oneClick === true && event.target !== firstPiece) {
                 oneClick = false;
+                numMoves++;
                 var secondPieceClass = event.target.getAttribute('class');
                 event.target.classList.remove(secondPieceClass);
                 event.target.classList.add(firstPieceClass);
@@ -72,6 +97,12 @@
                     }
                 }
                 if (win === true) {
+                    numPuzzles++;
+                    console.log(numPuzzles);
+                    console.log(numMoves);
+                    console.log(numSkips);
+                    end();
+                    console.log(seconds + " seconds");
                     setTimeout(function() {
                         window.alert('YOU WON! Click OK to play again.');
                         printPuzzle();
@@ -90,10 +121,10 @@
             }
         };
         puzzleBoard.on('click', swapPieces);
-        newPuzzle.on('click', printPuzzle);
+        skipButton.on('click', skipPuzzle);
     };
     // init GET request
     printPuzzle();
     gameLogic();
+    start();
 })();
-
