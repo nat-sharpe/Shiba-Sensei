@@ -1,0 +1,124 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.puzzle-board {
+    background-color: pink; 
+    --board-width: 80vw;
+    --board-height: 80vw;
+    width: var(--board-width);
+    height: var(--board-height);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.new-puzzle {
+    width: 15vh;
+    height: 8vh;
+    cursor: pointer;
+}
+
+@media (min-width: 360px)  {
+    .puzzle-board {
+        --board-width: 80vw;
+        --board-height: 80vw;
+    }
+}
+
+@media (min-width: 360px) and (orientation: landscape) {
+    .puzzle-board {
+        --board-width: 80vw;
+        --board-height: 80vw;
+    }
+}
+
+@media (min-width: 768px) {
+    .puzzle-board {
+        --board-width: 80vw;
+        --board-height: 80vw;
+    }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+    .puzzle-board {
+        --board-width: 80vh;
+        --board-height: 80vh;
+    }
+}
+
+@media (min-width: 1200px) {
+    .puzzle-board {
+        --board-width: 80vh;
+        --board-height: 80vh;
+    }
+}
+
+.puzzle-piece {
+    width: calc(var(--board-width) / 3);
+    height: calc(var(--board-height) / 3);
+    position: relative;
+    overflow: hidden;
+}
+
+.top-left-image, .top-mid-image, .top-right-image, .mid-left-image, .mid-mid-image, .mid-right-image, .bottom-left-image, .bottom-mid-image, .bottom-right-image {
+    width: 300%;
+    height: 300%;
+    position: absolute;
+}
+
+.top-left-image {
+    top: 0;
+    left: 0;
+}
+
+.top-mid-image {
+    top: 0;
+    left: calc(var(--board-width) / -3);
+}
+
+.top-right-image {
+    top: 0;
+    left: calc((var(--board-width) / -3) * 2);
+}
+
+.mid-left-image {
+    top: calc(var(--board-height) / -3);
+    left: 0;
+}
+
+.mid-mid-image {
+    top: calc(var(--board-height) / -3);
+    left: calc(var(--board-width) / -3);
+}
+
+.mid-right-image {
+    top: calc(var(--board-height) / -3);
+    left: calc((var(--board-width) / -3) * 2);
+}
+
+.bottom-left-image {
+    top: calc((var(--board-height) / -3) * 2);
+    left: 0;
+}
+
+.bottom-mid-image {
+    top: calc((var(--board-height) / -3) * 2);
+    left: calc(var(--board-width) / -3);
+}
+
+.bottom-right-image {
+    top: calc((var(--board-height) / -3) * 2);
+    left: calc((var(--board-width) / -3) * 2);
+}
+
+.highlightproperties {
+    opacity: 0.33;
+}
