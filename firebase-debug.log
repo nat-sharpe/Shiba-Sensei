@@ -1,0 +1,32 @@
+[debug] [2018-08-07T14:28:47.164Z] ----------------------------------------------------------------------
+[debug] [2018-08-07T14:28:47.166Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-08-07T14:28:47.171Z] CLI Version:   4.0.3
+[debug] [2018-08-07T14:28:47.171Z] Platform:      darwin
+[debug] [2018-08-07T14:28:47.171Z] Node Version:  v8.11.3
+[debug] [2018-08-07T14:28:47.171Z] Time:          Tue Aug 07 2018 10:28:47 GMT-0400 (EDT)
+[debug] [2018-08-07T14:28:47.171Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-08-07T14:28:47.182Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-08-07T14:28:47.182Z] > authorizing via signed-in user
+[debug] [2018-08-07T14:28:47.185Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/shibe-puzzle  
+  
+ Tue Aug 07 2018 10:28:47 GMT-0400 (EDT)
+[debug] [2018-08-07T14:28:47.474Z] <<< HTTP RESPONSE 200
+[debug] [2018-08-07T14:28:47.475Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/shibe-puzzle/tokens  
+  
+ Tue Aug 07 2018 10:28:47 GMT-0400 (EDT)
+[debug] [2018-08-07T14:28:47.800Z] <<< HTTP RESPONSE 200
+[debug] [2018-08-07T14:28:47.802Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/shibe-puzzle  
+  
+ Tue Aug 07 2018 10:28:47 GMT-0400 (EDT)
+[debug] [2018-08-07T14:28:48.121Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/xavier/Dropbox/Masterminds-App'...
+[info] 
+[debug] [2018-08-07T14:28:48.124Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/818596725520/clients/_:getWebAppConfig  
+  
+ Tue Aug 07 2018 10:28:48 GMT-0400 (EDT)
+[debug] [2018-08-07T14:28:48.981Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
