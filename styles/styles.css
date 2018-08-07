@@ -5,6 +5,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;    
 }
@@ -17,6 +18,12 @@ body {
     height: var(--board-height);
     display: flex;
     flex-wrap: wrap;
+}
+
+.new-puzzle {
+    width: 15vh;
+    height: 8vh;
+    cursor: pointer;
 }
 
 @media (min-width: 360px)  {
