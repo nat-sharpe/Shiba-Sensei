@@ -17,10 +17,16 @@
         return imagesScrambled;
     };
     var imagesScrambled = scrambleImages(imagesSorted);
-    var puzzleBoard = document.querySelector('.puzzle-board');
+    var puzzleBoard = $('.puzzle-board');
+    var newPuzzle = $('.new-puzzle');
+
+    var printPuzzle = function () {
+        $.get(url, getImages);
+    }
     // init get images function
 
     var getImages = function (data) {
+        puzzleBoard.empty(puzzleBoard.children);   
         image = data[0];
         // init puzzle pieces
         for (var i = 0; i < 9; i++) {
@@ -33,11 +39,12 @@
                 pieceImage.classList.add(imagesScrambled[i]);
 
                 puzzlePiece.appendChild(pieceImage);
-                puzzleBoard.appendChild(puzzlePiece);
+                puzzleBoard.append(puzzlePiece);
             };
             setPuzzleBoard();
         };
     };
+
     var gameLogic = function () {
         var oneClick = false;
         var firstPiece = '';
@@ -65,7 +72,10 @@
                     }
                 }
                 if (win === true) {
-                    window.alert("YOU WON! Click refresh to generate another doge.")
+                    setTimeout(function() {
+                        window.alert('YOU WON! Click OK to play again.');
+                        printPuzzle();
+                    }, 1000);
                 }
             }
             else if (oneClick === true && event.target === firstPiece) {
@@ -79,10 +89,11 @@
                 event.target.classList.add('highlightproperties');
             }
         };
-        puzzleBoard.addEventListener('click', swapPieces);
+        puzzleBoard.on('click', swapPieces);
+        newPuzzle.on('click', printPuzzle);
     };
     // init GET request
-    $.get(url, getImages);
+    printPuzzle();
     gameLogic();
 })();
 
