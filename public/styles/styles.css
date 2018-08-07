@@ -20,7 +20,7 @@ body {
     flex-wrap: wrap;
 }
 
-.new-puzzle {
+.skip-button {
     width: 15vh;
     height: 8vh;
     cursor: pointer;
