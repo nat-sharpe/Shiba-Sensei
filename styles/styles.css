@@ -34,10 +34,18 @@ main {
     font-size: 300%;
 }
 
+.timer-green {
+    color: green;
+}
+
 .skip-button {
-    width: 15vh;
-    height: 8vh;
+    background-color: green;
+    padding: 20px;
     cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
 }
 
 @media (min-width: 360px)  {
@@ -80,12 +88,14 @@ main {
     height: calc(var(--board-height) / 3);
     position: relative;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .top-left-image, .top-mid-image, .top-right-image, .mid-left-image, .mid-mid-image, .mid-right-image, .bottom-left-image, .bottom-mid-image, .bottom-right-image {
     width: 300%;
     height: 300%;
     position: absolute;
+    pointer-events: all;
 }
 
 .top-left-image {
