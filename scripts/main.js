@@ -22,24 +22,10 @@
     var numMoves = 0;
     var numSkips = 0;
     var numPuzzles = 0;
-    var startTime = new Date().getTime();
-
-    var startTimer = function() {
-        var now = new Date().getTime();
-        var distance = (startTime + 61000) - now;
-        var seconds = Math.floor(distance % (1000 * 60) / 1000);
-        var timer = $(".timer");
-        if (seconds > 10) {
-            timer.text('0:' + seconds);
-        }
-        if (seconds < 10) {
-            timer.text('0:0' + seconds);
-        }
-        if (distance < 0) {
-          clearInterval(startTimer);
-          timer.text("TIME'S UP!");
-        }
-    };
+    var seconds = 60;
+    var timer = $(".timer");
+    var isPaused = false;
+    var bonus = false;
 
     var printPuzzle = function () {
         $.get('https://my-little-cors-proxy.herokuapp.com/'+url, getImages);
@@ -61,6 +47,8 @@
 
                 puzzlePiece.appendChild(pieceImage);
                 puzzleBoard.append(puzzlePiece);
+
+                isPaused = false;
             };
             setPuzzleBoard();
         };
@@ -71,53 +59,61 @@
         var firstPiece = '';
         var firstPieceClass = '';
 
-        var skipPuzzle = function () {
+        var skipPuzzle = function (event) {
+            event.preventDefault();
             oneClick = false;
+            isPaused = true;
             numSkips++;
             printPuzzle();
         }
         var swapPieces = function(event) {
-            if (oneClick === true && event.target !== firstPiece) {
-                oneClick = false;
-                numMoves++;
-                var secondPieceClass = event.target.getAttribute('class');
-                event.target.classList.remove(secondPieceClass);
-                event.target.classList.add(firstPieceClass);
-                firstPiece.classList.add(secondPieceClass);
-                firstPiece.classList.remove(firstPieceClass);
-                firstPiece.classList.remove('highlightproperties');
-                var puzzlePieceList = document.getElementsByClassName('puzzle-piece')
-                var listToCompare = [];
-                for (var i = 0; i < 9; i++) {
-                    var imgPosition = puzzlePieceList[i].firstChild.className;
-                    listToCompare.push(imgPosition);
-                };
-                var win = true
-                for (var i = 0; i < 9; i++) {
-                    if (imagesSorted[i] !== listToCompare[i]) {
-                        win = false
+            event.preventDefault();
+            if (event.target !== event.currentTarget) {
+                console.log(event.target)
+                if (oneClick === true && event.target !== firstPiece) {
+                    oneClick = false;
+                    numMoves++;
+                    var secondPieceClass = event.target.getAttribute('class');
+                    event.target.classList.remove(secondPieceClass);
+                    event.target.classList.add(firstPieceClass);
+                    firstPiece.classList.add(secondPieceClass);
+                    firstPiece.classList.remove(firstPieceClass);
+                    firstPiece.classList.remove('highlightproperties');
+                    var puzzlePieceList = document.getElementsByClassName('puzzle-piece')
+                    var listToCompare = [];
+                    for (var i = 0; i < 9; i++) {
+                        var imgPosition = puzzlePieceList[i].firstChild.className;
+                        listToCompare.push(imgPosition);
+                    };
+                    var win = true
+                    for (var i = 0; i < 9; i++) {
+                        if (imagesSorted[i] !== listToCompare[i]) {
+                            win = false
+                        }
+                    }
+                    if (win === true) {
+                        numPuzzles++;
+                        isPaused = true;
+                        seconds += 11;
+                        bonus = true;
+                        console.log(numPuzzles);
+                        console.log(numMoves);
+                        console.log(numSkips);
+                        setTimeout(function() {
+                            printPuzzle();
+                        }, 1000);
                     }
                 }
-                if (win === true) {
-                    numPuzzles++;
-                    console.log(numPuzzles);
-                    console.log(numMoves);
-                    console.log(numSkips);
-                    setTimeout(function() {
-                        window.alert('YOU WON! Click OK to play again.');
-                        printPuzzle();
-                    }, 1000);
+                else if (oneClick === true && event.target === firstPiece) {
+                    oneClick = false;
+                    firstPiece.classList.remove('highlightproperties');
                 }
-            }
-            else if (oneClick === true && event.target === firstPiece) {
-                oneClick = false;
-                firstPiece.classList.remove('highlightproperties');
-            }
-            else {
-                oneClick = true;
-                firstPiece = event.target;
-                firstPieceClass = event.target.getAttribute('class');
-                event.target.classList.add('highlightproperties');
+                else {
+                    oneClick = true;
+                    firstPiece = event.target;
+                    firstPieceClass = event.target.getAttribute('class');
+                    event.target.classList.add('highlightproperties');
+                }
             }
         };
         puzzleBoard.on('click', swapPieces);
@@ -126,9 +122,24 @@
     // init GET request
     printPuzzle();
     gameLogic();
-
-    setTimeout(function() {
-        setInterval(startTimer, 1000);
-    }, 0);
-
+    
+    window.setInterval(function() {
+        if(!isPaused) {
+            timer.removeClass('timer-green');
+            if (bonus) {
+                timer.addClass('timer-green');
+                bonus = false;
+            }
+            seconds -= 1;
+            if (seconds > 10) {
+                timer.text('0:' + seconds);
+            }
+            if (seconds < 10) {
+                timer.text('0:0' + seconds);
+            }
+            if (seconds < 0) {
+              timer.text("TIME'S UP!");
+            }
+        }
+    }, 1000);
 })();
