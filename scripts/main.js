@@ -159,8 +159,6 @@
     src: ['./audio/bork.mp3'],
     });
 
-  })();
-
 var startGame = function () {
         main.empty(main.children);   
         printPuzzle();
