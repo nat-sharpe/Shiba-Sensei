@@ -4,18 +4,42 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
     font-family: Arial, Helvetica, sans-serif;   
+    font-size: 10px;
 }
 
-main {
+.main {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center; 
-    flex-shrink: inherit;
+    flex: 3;
+}
+
+.title {
+    width: 50%;
+    color: red;
+    margin: 0;
+    font-size: 5em;
+    text-align: center;
+}
+
+.sensei-image {
+    height: 50%;
+    border-radius: 100%;
+}
+
+.start-button {
+    background-color: green;
+    padding: 20px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    margin: 0;
 }
 
 .puzzle-board {
@@ -31,7 +55,7 @@ main {
 .timer {
     color: red;
     margin: 0;
-    font-size: 300%;
+    font-size: 400%;
 }
 
 .timer-green {
@@ -39,13 +63,14 @@ main {
 }
 
 .skip-button {
-    background-color: green;
+    background-color: blue;
     padding: 20px;
     cursor: pointer;
     text-align: center;
-    font-size: 30px;
+    font-size: 300%;
     color: white;
     font-weight: bold;
+    margin: 0;
 }
 
 @media (min-width: 360px)  {

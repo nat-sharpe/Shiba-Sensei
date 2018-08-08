@@ -17,15 +17,21 @@
         return imagesScrambled;
     };
     var imagesScrambled = scrambleImages(imagesSorted);
-    var puzzleBoard = $('.puzzle-board');
-    var skipButton = $('.skip-button');
+    var main = $(".main");
     var numMoves = 0;
     var numSkips = 0;
     var numPuzzles = 0;
     var seconds = 60;
-    var timer = $(".timer");
-    var isPaused = false;
+    var isPaused = true;
     var bonus = false;
+    var timer = $('<h1>');
+    timer.addClass('timer');
+    timer.text('1:00');
+    var puzzleBoard = $('<div>');
+    puzzleBoard.addClass('puzzle-board');
+    var skipButton = $('<p>');
+    skipButton.text('SKIP');
+    skipButton.addClass('skip-button');
 
     var printPuzzle = function () {
         $.get('https://my-little-cors-proxy.herokuapp.com/'+url, getImages);
@@ -33,6 +39,9 @@
 
     // init get images function
     var getImages = function (data) {
+        main.append(timer);
+        main.append(puzzleBoard);
+        main.append(skipButton);
         puzzleBoard.empty(puzzleBoard.children);   
         image = data[0];
         // init puzzle pieces
@@ -40,14 +49,11 @@
             var setPuzzleBoard = function () {
                 var puzzlePiece = document.createElement('div');
                 var pieceImage = document.createElement('img');
-
                 puzzlePiece.classList.add('puzzle-piece');
                 pieceImage.setAttribute('src', image);
                 pieceImage.classList.add(imagesScrambled[i]);
-
                 puzzlePiece.appendChild(pieceImage);
                 puzzleBoard.append(puzzlePiece);
-
                 isPaused = false;
             };
             setPuzzleBoard();
@@ -94,7 +100,12 @@
                     if (win === true) {
                         numPuzzles++;
                         isPaused = true;
-                        seconds += 11;
+                        if (seconds < (39)) {
+                            seconds += 16;
+                        }
+                        else {
+                            seconds = 60;
+                        }
                         bonus = true;
                         console.log(numPuzzles);
                         console.log(numMoves);
@@ -120,26 +131,47 @@
         skipButton.on('click', skipPuzzle);
     };
     // init GET request
-    printPuzzle();
     gameLogic();
-    
-    window.setInterval(function() {
-        if(!isPaused) {
-            timer.removeClass('timer-green');
-            if (bonus) {
-                timer.addClass('timer-green');
-                bonus = false;
+    window.setTimeout(function() {
+        window.setInterval(function() {
+            if(!isPaused) {
+                timer.removeClass('timer-green');
+                if (bonus) {
+                    timer.addClass('timer-green');
+                    bonus = false;
+                }
+                seconds -= 1;
+                if (seconds > 10) {
+                    timer.text('0:' + seconds);
+                }
+                if (seconds < 10) {
+                    timer.text('0:0' + seconds);
+                }
+                if (seconds < 0) {
+                  timer.text("TIME'S UP!");
+                }
             }
-            seconds -= 1;
-            if (seconds > 10) {
-                timer.text('0:' + seconds);
-            }
-            if (seconds < 10) {
-                timer.text('0:0' + seconds);
-            }
-            if (seconds < 0) {
-              timer.text("TIME'S UP!");
-            }
-        }
+        }, 1000);
     }, 1000);
+
+    var startGame = function () {
+        main.empty(main.children);   
+        printPuzzle();
+    }
+    var homeScreen = function () {
+        var title = $('<h1>');
+        title.addClass('title');
+        title.text('SHIBA SENSEI');
+        var senseiImage = $('<img>');
+        senseiImage.attr('src', 'images/sensei.jpg')
+        senseiImage.addClass('sensei-image');
+        var startButton = $('<p>');
+        startButton.text('Start Test');
+        startButton.addClass('start-button');
+        main.append(title);
+        main.append(senseiImage);
+        main.append(startButton);
+        startButton.on('click', startGame); 
+    }
+    homeScreen();
 })();
