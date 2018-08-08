@@ -87,6 +87,7 @@
                     firstPiece.classList.remove('highlightproperties');
                     var puzzlePieceList = document.getElementsByClassName('puzzle-piece')
                     var listToCompare = [];
+                    borkOnClick.play();
                     for (var i = 0; i < 9; i++) {
                         var imgPosition = puzzlePieceList[i].firstChild.className;
                         listToCompare.push(imgPosition);
@@ -154,24 +155,29 @@
         }, 1000);
     }, 1000);
 
-    var startGame = function () {
+  var borkOnClick = new Howl({
+    src: ['./audio/bork.mp3'],
+    });
+
+var startGame = function () {
         main.empty(main.children);   
         printPuzzle();
     }
-    var homeScreen = function () {
-        var title = $('<h1>');
-        title.addClass('title');
-        title.text('SHIBA SENSEI');
-        var senseiImage = $('<img>');
-        senseiImage.attr('src', 'images/sensei.jpg')
-        senseiImage.addClass('sensei-image');
-        var startButton = $('<p>');
-        startButton.text('Start Test');
-        startButton.addClass('start-button');
-        main.append(title);
-        main.append(senseiImage);
-        main.append(startButton);
-        startButton.on('click', startGame); 
-    }
-    homeScreen();
+var homeScreen = function () {
+    var title = $('<h1>');
+    title.addClass('title');
+    title.text('SHIBA SENSEI');
+    var senseiImage = $('<img>');
+    senseiImage.attr('src', 'images/sensei.jpg')
+    senseiImage.addClass('sensei-image');
+    var startButton = $('<p>');
+    startButton.text('Start Test');
+    startButton.addClass('start-button');
+    main.append(title);
+    main.append(senseiImage);
+    main.append(startButton);
+    startButton.on('click', startGame); 
+}
+homeScreen();
+
 })();
