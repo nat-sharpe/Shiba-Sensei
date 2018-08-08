@@ -81,6 +81,7 @@
                     firstPiece.classList.remove('highlightproperties');
                     var puzzlePieceList = document.getElementsByClassName('puzzle-piece')
                     var listToCompare = [];
+                    borkOnClick.play();
                     for (var i = 0; i < 9; i++) {
                         var imgPosition = puzzlePieceList[i].firstChild.className;
                         listToCompare.push(imgPosition);
@@ -143,3 +144,17 @@
         }
     }, 1000);
 })();
+//Commented out until I get it working. For now, howler will have to do.
+// var borkOnClick = new Pizzicato.Sound({ 
+//     source: 'file',
+//     options: { path: './bork.wav' }
+// });
+
+// var delay = new Pizzicato.Effects.Delay();
+// borkOnClick.addEffect(delay);
+
+// borkOnClick.play();
+
+var borkOnClick = new Howl({
+    src: ['./audio/bork.mp3'],
+    });
