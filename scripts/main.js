@@ -263,7 +263,7 @@
                     endScreen();
                 }
             }
-        }, 200);
+        }, 1000);
     }, 1000);
 
     var borkOnClick = new Howl({
