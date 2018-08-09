@@ -23,10 +23,10 @@
     var numPuzzles = 0;
     // playersStat = rank in firebaseDB;
     // will connect w/ firebase's realtime database.
-    var playersStat = 233;
-    var speedStat = 'so normal';
-    var agilityStat = 'top doge'
-    var willPowerStat = 'much bad'
+    var playersStat = 100;
+    var speedStat = 800;
+    var agilityStat = 700;
+    var willPowerStat = 1000;
     var seconds = 60;
     var isPaused = true;
     var bonus = false;
@@ -47,6 +47,37 @@
         document.location.reload();
     }
 
+    var calcRank1 = function (score, totalStat) {
+        var average = (totalStat / playersStat);
+        var rank = null;
+        if (score < (average * 0.5)) {
+            rank = 'much bad';
+        }
+        if (score > (average * 0.5) && score < (average * 1.5)) {
+            rank = 'wow so normal';
+        }
+        if (score > (average * 1.5)) {
+            rank = 'top doge';
+        }
+        return rank;
+    }
+
+
+    var calcRank2 = function (score, totalStat) {
+        var average = (totalStat / playersStat);
+        var rank = null;
+        if (score < (average * 0.5)) {
+            rank = 'top doge';
+        }
+        if (score > (average * 0.5) && score < (average * 1.5)) {
+            rank = 'wow so normal';
+        }
+        if (score > (average * 1.5)) {
+            rank = 'much bad';
+        }
+        return rank;
+    }
+
     var skillScreen = function () {
         main.empty(main.children);   
         var players = $('<p>');
@@ -60,19 +91,19 @@
         speed.text('speed:');
         var speedNum = $('<h1>');
         speedNum.addClass('endTitle2');
-        speedNum.text(`${speedStat}`);
+        speedNum.text(`${calcRank1(numPuzzles, speedStat)}`);
         var agility = $('<p>');
         agility.addClass('small-words');
         agility.text('agility:');
         var agilityNum = $('<h1>');
         agilityNum.addClass('endTitle2');
-        agilityNum.text(`${agilityStat}`);
+        agilityNum.text(`${calcRank2(numMoves, agilityStat)}`);
         var willPower = $('<p>');
         willPower.addClass('small-words');
         willPower.text('will power:');
         var willPowerNum = $('<h1>');
         willPowerNum.addClass('endTitle2');
-        willPowerNum.text(`${willPowerStat}`);
+        willPowerNum.text(`${calcRank2(numSkips, willPowerStat)}`);
         var playButton = $('<p>');
         playButton.text('play again');
         playButton.addClass('skill-button');
