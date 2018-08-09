@@ -34,7 +34,7 @@
     var puzzleBoard = $('<div>');
     puzzleBoard.addClass('puzzle-board');
     var skipButton = $('<p>');
-    skipButton.text('hek no');
+    skipButton.text('skip');
     skipButton.addClass('skip-button');
 
     var printPuzzle = function () {
@@ -72,7 +72,7 @@
         willPowerNum.addClass('endTitle2');
         willPowerNum.text(`${willPowerStat}`);
         var playButton = $('<p>');
-        playButton.text('try over');
+        playButton.text('play again');
         playButton.addClass('skill-button');
         main.append(speed);
         main.append(speedNum);
