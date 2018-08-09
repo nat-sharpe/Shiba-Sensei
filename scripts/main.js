@@ -224,7 +224,7 @@
                     timer.text('0:0' + seconds);
                 }
                 if (seconds < 0) {
-                  timer.text("time done");
+                    timer.text("time done");
                 }
                 if (seconds < -1) {
                     isPaused = true;
