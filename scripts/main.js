@@ -21,6 +21,8 @@
     var numMoves = 0;
     var numSkips = 0;
     var numPuzzles = 0;
+    // playersStat = rank in firebaseDB;
+    // will connect w/ firebase's realtime database.
     var playersStat = 233;
     var speedStat = 'such normal';
     var agilityStat = 'top doge'
@@ -224,7 +226,7 @@
                     timer.text('0:0' + seconds);
                 }
                 if (seconds < 0) {
-                  timer.text("time done");
+                    timer.text("time done");
                 }
                 if (seconds < -1) {
                     isPaused = true;
