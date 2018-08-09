@@ -5,47 +5,97 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;   
-    font-size: 10px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: floralwhite;
 }
 
 .main {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center; 
     flex: 3;
+    padding: 1em 0;
 }
 
 .title {
-    width: 50%;
-    color: red;
+    width: 70%;
+    color: lightseagreen;
     margin: 0;
-    font-size: 5em;
+    font-size: 5rem;
     text-align: center;
+}
+
+.endTitle {
+    width: 50%;
+    color: floralwhite;
+    margin: 0;
+    padding: 1rem 3rem;
+    font-size: 3rem;
+    text-align: center;
+    background-color: lightseagreen;
+}
+
+.endTitle2 {
+    width: 70%;
+    color: lightseagreen;
+    margin: 0;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.small-words {
+    width: 100%;
+    background-color: lightseagreen;
+    padding: 0rem 2rem;
+    text-align: center;
+    font-size: 2rem;
+    color: floralwhite;
+    margin: 0;
 }
 
 .sensei-image {
-    height: 50%;
+    height: 40%;
     border-radius: 100%;
 }
 
-.start-button {
-    background-color: green;
-    padding: 20px;
+
+.start-button, .skip-button, .skill-button {
+    background-color: lightseagreen;
+    padding: 1rem 2rem;
     cursor: pointer;
     text-align: center;
-    font-size: 30px;
-    color: white;
-    font-weight: bold;
+    font-size: 2rem;
+    color: floralwhite;
     margin: 0;
+}
+
+.skill-button {
+    cursor: pointer;
+}
+
+.skill-button:hover {
+    background-color: pink;
+}
+
+
+.start-button {
+    background-color: lightseagreen;
+}
+
+.start-button:hover {
+    background-color: pink;
 }
 
 .puzzle-board {
     background-color: pink; 
-    --board-width: 80vw;
-    --board-height: 80vw;
+    --board-width: 100vw;
+    --board-height: 100vw;
     width: var(--board-width);
     height: var(--board-height);
     display: flex;
@@ -53,24 +103,35 @@ body {
 }
 
 .timer {
-    color: red;
+    color: lightseagreen;
     margin: 0;
-    font-size: 400%;
+    font-size: 3rem;
 }
 
 .timer-green {
-    color: green;
+    color: pink;
 }
 
 .skip-button {
-    background-color: blue;
-    padding: 20px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 300%;
-    color: white;
-    font-weight: bold;
-    margin: 0;
+    background-color: lightseagreen;
+}
+
+.skip-button:hover {
+    background-color: pink;
+}
+
+@media (min-width: 300px)  {
+    .puzzle-board {
+        --board-width: 100vw;
+        --board-height: var(--board-width);
+    }
+    .endTitle {
+        width: 100%;
+        font-size: 3rem;
+    }
+    .title {
+        font-size: 3rem;
+    }
 }
 
 @media (min-width: 360px)  {
@@ -78,12 +139,9 @@ body {
         --board-width: 100vw;
         --board-height: var(--board-width);
     }
-}
-
-@media (min-width: 360px) and (orientation: landscape) {
-    .puzzle-board {
-        --board-width: 80vw;
-        --board-height: 80vw;
+    .endTitle {
+        width: 100%;
+        font-size: 4rem;
     }
 }
 
@@ -92,19 +150,39 @@ body {
         --board-width: 80vw;
         --board-height: 80vw;
     }
-}
-
-@media (min-width: 768px) and (orientation: landscape) {
-    .puzzle-board {
-        --board-width: 75vh;
-        --board-height: 75vh;
+    body {
+        font-size: 40px;
+    }
+    .endTitle {
+        width: 40%;
+        font-size: 3rem;
+    }
+    .small-words {
+        width: 40%;
     }
 }
 
 @media (min-width: 1200px) {
     .puzzle-board {
-        --board-width: 75vh;
-        --board-height: 75vh;
+        --board-width: 70vh;
+        --board-height: 70vh;
+    }
+    body {
+        font-size: 10px;
+    }
+    .endTitle {
+        width: 40%;
+        font-size: 3rem;
+    }
+    .small-words {
+        width: 40%;
+    }
+    .endTitle2 {
+        width: 70%;
+        color: lightseagreen;
+        margin: 0;
+        font-size: 3rem;
+        text-align: center;
     }
 }
 
@@ -114,6 +192,7 @@ body {
     position: relative;
     overflow: hidden;
     pointer-events: none;
+    cursor: pointer;
 }
 
 .top-left-image, .top-mid-image, .top-right-image, .mid-left-image, .mid-mid-image, .mid-right-image, .bottom-left-image, .bottom-mid-image, .bottom-right-image {

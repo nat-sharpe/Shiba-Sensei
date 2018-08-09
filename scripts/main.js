@@ -21,6 +21,10 @@
     var numMoves = 0;
     var numSkips = 0;
     var numPuzzles = 0;
+    var playersStat = 233;
+    var speedStat = 'such normal';
+    var agilityStat = 'top doge'
+    var willPowerStat = 'much bad'
     var seconds = 60;
     var isPaused = true;
     var bonus = false;
@@ -30,13 +34,83 @@
     var puzzleBoard = $('<div>');
     puzzleBoard.addClass('puzzle-board');
     var skipButton = $('<p>');
-    skipButton.text('SKIP');
+    skipButton.text('skip');
     skipButton.addClass('skip-button');
 
     var printPuzzle = function () {
         $.get('https://my-little-cors-proxy.herokuapp.com/'+url, getImages);
     };
 
+    var resetGame = function () {
+        document.location.reload();
+    }
+
+    var skillScreen = function () {
+        main.empty(main.children);   
+        var players = $('<p>');
+        players.addClass('small-words');
+        players.text('other players:');
+        var playersNum = $('<h1>');
+        playersNum.addClass('endTitle2');
+        playersNum.text(`${playersStat}`);
+        var speed = $('<p>');
+        speed.addClass('small-words');
+        speed.text('speed:');
+        var speedNum = $('<h1>');
+        speedNum.addClass('endTitle2');
+        speedNum.text(`${speedStat}`);
+        var agility = $('<p>');
+        agility.addClass('small-words');
+        agility.text('agility:');
+        var agilityNum = $('<h1>');
+        agilityNum.addClass('endTitle2');
+        agilityNum.text(`${agilityStat}`);
+        var willPower = $('<p>');
+        willPower.addClass('small-words');
+        willPower.text('will power:');
+        var willPowerNum = $('<h1>');
+        willPowerNum.addClass('endTitle2');
+        willPowerNum.text(`${willPowerStat}`);
+        var playButton = $('<p>');
+        playButton.text('play again');
+        playButton.addClass('skill-button');
+        main.append(speed);
+        main.append(speedNum);
+        main.append(agility);
+        main.append(agilityNum);
+        main.append(willPower);
+        main.append(willPowerNum);
+        main.append(players);
+        main.append(playersNum);
+        main.append(playButton);
+        playButton.on('click', resetGame); 
+    };
+
+    var endScreen = function () {
+        main.empty(main.children);   
+        var endTitle = $('<h1>');
+        endTitle.addClass('endTitle');
+        endTitle.text('such awesome');
+        var solves = $('<h1>');
+        solves.addClass('title');
+        solves.text(`solves: ${numPuzzles}`);
+        var moves = $('<h1>');
+        moves.addClass('title');
+        moves.text(`moves: ${numMoves}`);
+        var skips = $('<h1>');
+        skips.addClass('title');
+        skips.text(`skips: ${numSkips}`);
+        var skillButton = $('<p>');
+        skillButton.text('wut rank?');
+        skillButton.addClass('skill-button');
+        main.append(endTitle);
+        main.append(solves);
+        main.append(moves);
+        main.append(skips);
+        main.append(skillButton);
+        skillButton.on('click', skillScreen); 
+    };
+    
     // init get images function
     var getImages = function (data) {
         main.append(timer);
@@ -150,7 +224,11 @@
                     timer.text('0:0' + seconds);
                 }
                 if (seconds < 0) {
-                  timer.text("TIME'S UP!");
+                  timer.text("time done");
+                }
+                if (seconds < -1) {
+                    isPaused = true;
+                    endScreen();
                 }
             }
         }, 1000);
@@ -172,12 +250,12 @@ var startGame = function () {
 var homeScreen = function () {
     var title = $('<h1>');
     title.addClass('title');
-    title.text('SHIBA SENSEI');
+    title.text('shiba sensei');
     var senseiImage = $('<img>');
     senseiImage.attr('src', 'images/sensei.jpg')
     senseiImage.addClass('sensei-image');
     var startButton = $('<p>');
-    startButton.text('Start Test');
+    startButton.text('do test');
     startButton.addClass('start-button');
     main.append(title);
     main.append(senseiImage);
