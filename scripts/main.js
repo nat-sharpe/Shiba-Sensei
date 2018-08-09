@@ -71,6 +71,7 @@
             isPaused = true;
             numSkips++;
             printPuzzle();
+            fartOnClick.play();
         }
         var swapPieces = function(event) {
             event.preventDefault();
@@ -155,9 +156,14 @@
         }, 1000);
     }, 1000);
 
-  var borkOnClick = new Howl({
-    src: ['./audio/bork.mp3'],
+    var borkOnClick = new Howl({
+        src: ['./audio/bork.mp3'],
     });
+
+    var fartOnClick = new Howl({
+        src: ['./audio/fart-01.mp3']
+    });
+
 
 var startGame = function () {
         main.empty(main.children);   
