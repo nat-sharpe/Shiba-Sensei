@@ -22,7 +22,7 @@
     var numSkips = 0;
     var numPuzzles = 0;
     var playersStat = 233;
-    var speedStat = 'such normal';
+    var speedStat = 'so normal';
     var agilityStat = 'top doge'
     var willPowerStat = 'much bad'
     var seconds = 60;
@@ -92,13 +92,13 @@
         endTitle.addClass('endTitle');
         endTitle.text('such awesome');
         var solves = $('<h1>');
-        solves.addClass('title');
+        solves.addClass('endTitle2');
         solves.text(`solves: ${numPuzzles}`);
         var moves = $('<h1>');
-        moves.addClass('title');
+        moves.addClass('endTitle2');
         moves.text(`moves: ${numMoves}`);
         var skips = $('<h1>');
-        skips.addClass('title');
+        skips.addClass('endTitle2');
         skips.text(`skips: ${numSkips}`);
         var skillButton = $('<p>');
         skillButton.text('wut rank?');
@@ -150,7 +150,6 @@
         var swapPieces = function(event) {
             event.preventDefault();
             if (event.target !== event.currentTarget) {
-                console.log(event.target)
                 if (oneClick === true && event.target !== firstPiece) {
                     oneClick = false;
                     numMoves++;
@@ -163,6 +162,7 @@
                     var puzzlePieceList = document.getElementsByClassName('puzzle-piece')
                     var listToCompare = [];
                     borkOnClick.play();
+
                     for (var i = 0; i < 9; i++) {
                         var imgPosition = puzzlePieceList[i].firstChild.className;
                         listToCompare.push(imgPosition);
@@ -174,18 +174,16 @@
                         }
                     }
                     if (win === true) {
+                        solveOnClick.play();
                         numPuzzles++;
                         isPaused = true;
-                        if (seconds < (39)) {
-                            seconds += 16;
+                        if (seconds < (49)) {
+                            seconds += 11;
                         }
                         else {
                             seconds = 60;
                         }
                         bonus = true;
-                        console.log(numPuzzles);
-                        console.log(numMoves);
-                        console.log(numSkips);
                         setTimeout(function() {
                             printPuzzle();
                         }, 1000);
@@ -228,6 +226,7 @@
                 }
                 if (seconds < -1) {
                     isPaused = true;
+                    winOnClick.play();
                     endScreen();
                 }
             }
@@ -239,9 +238,16 @@
     });
 
     var fartOnClick = new Howl({
-        src: ['./audio/fart-01.mp3']
+        src: ['./audio/growl.mp3']
     });
 
+    var winOnClick = new Howl({
+        src: ['./audio/howl.mp3']
+    });
+
+    var solveOnClick = new Howl({
+        src: ['./audio/squeak2.wav']
+    });
 
 var startGame = function () {
         main.empty(main.children);   

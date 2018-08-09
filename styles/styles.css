@@ -67,12 +67,13 @@ body {
 
 .start-button, .skip-button, .skill-button {
     background-color: lightseagreen;
-    padding: 1rem 2rem;
+    padding: .5rem 1.5rem;
     cursor: pointer;
     text-align: center;
     font-size: 2rem;
     color: floralwhite;
     margin: 0;
+    border-radius: 8%;
 }
 
 .skill-button {
@@ -130,7 +131,11 @@ body {
         font-size: 3rem;
     }
     .title {
+        width: 100%;
         font-size: 3rem;
+    }
+    .main {
+        padding: 2rem 0;
     }
 }
 
@@ -143,12 +148,16 @@ body {
         width: 100%;
         font-size: 4rem;
     }
+    .title {
+        width: 70%;
+        font-size: 3rem;
+    }
 }
 
 @media (min-width: 768px) {
     .puzzle-board {
-        --board-width: 80vw;
-        --board-height: 80vw;
+        --board-width: 70vh;
+        --board-height: 70vh;
     }
     body {
         font-size: 40px;
@@ -159,6 +168,12 @@ body {
     }
     .small-words {
         width: 40%;
+    }
+    .title {
+        font-size: 5rem;
+    }
+    .timer {
+        font-size: 3rem;
     }
 }
 
@@ -183,6 +198,12 @@ body {
         margin: 0;
         font-size: 3rem;
         text-align: center;
+    }
+    .timer {
+        font-size: 3rem;
+    }
+    .title {
+        font-size: 4rem;
     }
 }
 
