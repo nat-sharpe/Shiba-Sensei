@@ -9,4 +9,10 @@
         messagingSenderId: "818596725520"
     };
     firebase.initializeApp(config);
+    // Get elements
+    const preRank = document.getElementsByClassName('rank');
+    // Create reference
+    const dbRefRank = firebase.database().ref().child('rank');
+    // Sync rank changes + log to console
+    dbRefRank.on('value', snap => console.log(snap.val()));
 })();
